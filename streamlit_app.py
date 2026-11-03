@@ -1,21 +1,27 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(
+    page_title="Dashboard Proyectos TI",
+    page_icon="📊",
+    layout="wide"
+)
+
 archivo = "DASHBOARD Proyectos TI.xlsm"
 
-st.title("Dashboard Proyectos TI")
+# Leer usando la segunda fila como encabezado
+df = pd.read_excel(
+    archivo,
+    sheet_name="Hoja1",
+    header=1
+)
 
-hoja1 = pd.read_excel(archivo, sheet_name="Hoja1")
-proyectos = pd.read_excel(archivo, sheet_name="Proyectos")
+st.title("📊 Dashboard Proyectos TI")
 
-st.header("Hoja1")
-st.dataframe(hoja1.head(10))
+st.subheader("Vista previa de datos")
 
-st.write("Columnas Hoja1")
-st.write(list(hoja1.columns))
+st.dataframe(df)
 
-st.header("Proyectos")
-st.dataframe(proyectos.head(10))
+st.subheader("Columnas detectadas")
 
-st.write("Columnas Proyectos")
-st.write(list(proyectos.columns))
+st.write(df.columns.tolist())
