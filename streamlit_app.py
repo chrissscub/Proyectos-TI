@@ -1,17 +1,21 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Dashboard Proyectos TI")
-
 archivo = "DASHBOARD Proyectos TI.xlsm"
 
-try:
-    xls = pd.ExcelFile(archivo)
+st.title("Dashboard Proyectos TI")
 
-    st.success("Archivo cargado correctamente")
+hoja1 = pd.read_excel(archivo, sheet_name="Hoja1")
+proyectos = pd.read_excel(archivo, sheet_name="Proyectos")
 
-    st.write("Hojas disponibles:")
-    st.write(xls.sheet_names)
+st.header("Hoja1")
+st.dataframe(hoja1.head(10))
 
-except Exception as e:
-    st.error(f"Error: {e}")
+st.write("Columnas Hoja1")
+st.write(list(hoja1.columns))
+
+st.header("Proyectos")
+st.dataframe(proyectos.head(10))
+
+st.write("Columnas Proyectos")
+st.write(list(proyectos.columns))
